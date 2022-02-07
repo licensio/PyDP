@@ -5,14 +5,23 @@ Introduction To Differential Privacy
 Introduction
 ============
 
-The era where we are living in is data driven, tons and tons of data are being generated in every second. A lot of this data is being used to improve our own lifestyle - be it recommending the best series to watch after a tiring day at work, suggesting the best gifts to buy when it's our best friend's birthday or keeping our birthday party photos sorted so that we can cherish them years later. All big companies are using data to gain insights of their progress which drives their business. Machine Learning has made our life from easy to easier but is it just about improving our lifestyle? This raises a question can machine learning change the way we live ? Can it improve our healthcare? Can ML be friends to those who are lonely and have no one to talk with? The answer is “Yes” and also “No”.
+The era we are living in is data-driven; more data is being generated now than ever before. Much of this data is being used to improve our lives - be it recommending the best videos to watch after a tiring day at work, suggesting the best gifts to buy when it's our best friend's birthday, or keeping our birthday party photos sorted so that we can cherish them years later. Many large companies are using data to gain insights into their financial and operational activities. Machine Learning (ML) has made our life easier in many ways ... but is it just about improving the quality of our lives?  
 
-Machine Learning and Data
+This raises a more fundamental question: can machine learning change the way we live?  Can it positively impact our health and happiness?  The answer is both "Yes" and  "No."
+
+Machine learning and data
 =========================
 
-Machine Learning is extensively both data and research driven. The more the data is, better will be the research on that particular topic. Now, all data cannot be released for research, there is a lot of private information which once leaked can be misused. Take for example, to tackle a particular medical problem we need a lot of medical health records. These records are considered as private information as no person would love the fact that her/his medical records are identifiable by anyone on the internet. Hence, these are some real world issues that need immediate solutions but the hands of the researchers are tied due to the unavailability of data. So, is there a solution ?
+Machine Learning is both data-driven and research-driven.  In general, the richer and more numerous the data, the better the research on that particular topic will be.  All data cannot, however, be released for research; many types of data include non-public personal or business information, and the redistribution of such information is typically restricted by laws, rules, contracts, and ethical standards.
 
-This is where “Differential Privacy” comes into the picture, a smarter way to a more secure and private AI. According to Andrew Trask, Founder at OpenMined - “Differential Privacy is the process to answer questions or solve problems using the data that we cannot see.” In this way researchers from all over the world can use private data in their research work without identifying the individual.
+Take, for example, building machine learning models to solve medical problems like radiology diagnosis.  Better, faster diagnoses could result in improved outcomes for patients facing a wide range of medical issues.  In order to train these models, researchers need medical health records, like patient case histories (e.g., ICD/CPT codes) and the corresponding radiology images for each patient (e.g., DICOM-format CT scans).
+
+In many countries and legal jurisdictions, these records are considered to be protected health information (PHI).  Storing, sharing, and even processing PHI is often highly restricted.  Even without the existence of such laws and rules, no one would want their identifiable medical records shared without permission on the Internet or in public otherwise.  But without access to such information, how can researchers train models to help these patients?  
+
+
+As we can see, real-world legal and ethical issues often prevent researchers from helping solving real-world problems.  Without data, neither traditional statistical analysis nor predictive machine learning applications can be developed.  Are we stuck in a world without a solution?
+
+Luckily, the answer is no.  Differential privacy is an approach to solving exactly this problem. In the words of Andrew Trask, OpenMined's Founder, "Differential Privacy is the process to answer questions or solve problems using the data that we cannot see."  In this way, researchers from all over the world can use private data in their research work without identifying the individual.
 
 .. figure:: https://user-images.githubusercontent.com/19529592/91377299-b58fbf80-e83c-11ea-9b56-a068ea3155c6.png
     :alt: my-picture1
@@ -24,15 +33,16 @@ This is where “Differential Privacy” comes into the picture, a smarter way t
 Why is Differential Privacy so important ?
 ==========================================
 
-The aim of any privacy algorithm is to keep one's private information safe and secured from external attacks. Differential privacy aims to keep an individual's identity secured even if their data is being used in research. An easy approach to maintain this kind of privacy is “Data Anonymization” which is a process of removing personally identifiable information from a dataset. It is seen that there are cons in following this approach:
+The aim of any privacy algorithm is to keep one's private information safe and secured from improper or undesired use. Differential privacy aims to keep an individual's identity secured even if their data is being used in research.  A different approach to privacy is “Data Anonymization,” which typically involves removing information from a dataset that can allow for re-identification of records.  In cases where records correspond to individuals, this normally means removing personally-identifiable information (PII). However, there are issues with this approach:
 
-* Anonymizing certain fields may make the entire dataset useless and not fit for any analysis.
+* Anonymizing certain fields may make the entire dataset useless and unfit for any analysis.
 
-* There are related sources or datasets available on the web and by statistically studying both the datasets, an individual can easily be re-identified.
+* Motivated actors can use other sources of information, such as public records or information available on the "dark web," to re-identify individuals or organizations in "anonymized" datasets.
 
-* If the dataset is large, the type of queries that can be drawn from the dataset cannot be predicted. This makes any dataset prone to external attacks.
+* If the dataset is large or will be used frequently or by many, it can be difficult to model the types of queries that will be made and how risks might emerge.  This makes many useful datasets prone to misuse.
 
-Hence, this process is prone to risk and is considered as fundamentally wrong. Netflix once released a challenge for everyone to build up the best recommendation engine. For this they released an anonymized dataset of 100 million movie ratings from half a million users. So, they did not publicly release any data that could lead to the identification of the users.
+Hence, traditional anonymization processes have known weaknesses and are increasingly considered to be fundamentally incorrect approaches.  One of the most well-known examples of attack involves Netflix, which previously held an annual recommendation engine challenge.  Between 2006 and 2009, Netflix released an anonymized data of over 100 million movies from almost half a million users.  They used traditional anonymization techniques to remove PII from these records, believing that this data could not be re-identified.
+
 
 .. figure:: https://user-images.githubusercontent.com/19529592/91381064-14a50280-e844-11ea-9dd0-1af088c3924d.png
     :alt: netflix
@@ -41,17 +51,14 @@ Hence, this process is prone to risk and is considered as fundamentally wrong. N
 
     Image Credits: Secure and Private AI (Udacity)
 
-
-Despite the fact that the dataset was anonymized (no username or movie name was released) yet two Researchers at University of Texas released a `paper <https://www.cs.utexas.edu/~shmat/shmat_oak08netflix.pdf>`_ where they showed how they have de-anonymized a maximum chunk of the dataset.
+Unfortunately, two researchers at the University of Texas were able to successfully re-identify some users. They released a `paper <https://www.cs.utexas.edu/~shmat/shmat_oak08netflix.pdf>`_ , detailing their methodology and the results.  In this paper, they explain how they were able to combine information from IMDB with the Netflix Prize data.  Ten years down the line they have published yet another `research paper <https://www.cs.princeton.edu/~arvindn/publications/de-anonymization-retrospective.pdf>`_  where they have reviewed de-anonymization of datasets in the present world. There are other instances too where such attacks have been made which led to the leakage of private information.
 
 .. figure:: https://user-images.githubusercontent.com/19529592/91381399-ef64c400-e844-11ea-8535-0180f37962de.png
     :alt: research
     :align: center
     :figclass: align-center
 
-They scraped the IMDB Website and by statistical analysis on these two datasets, they were able to identify the movie names and also the individual names. Ten years down the line they have published yet another `research paper <https://www.cs.princeton.edu/~arvindn/publications/de-anonymization-retrospective.pdf>`_  where they have reviewed de-anonymization of datasets in the present world. There are other instances too where such attacks have been made which led to the leakage of private information.
-
-Now, that we have learnt how important is “Differential Privacy”, let see how is the Differential Privacy actually implemented.
+Now that we understand why traditional anonymization techniques need improvement and why Differential Privacy is so important, let's learn more about how Differential Privacy is actually implemented.
 
 
 How is Differential Privacy implemented ?
